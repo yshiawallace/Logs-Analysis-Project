@@ -52,8 +52,9 @@ def get_db_data(query):
         print('Cannot connect to the database.')
     cur = conn.cursor()
     cur.execute(query)
-    return cur.fetchall()
+    results = cur.fetchall()
     conn.close()
+    return results
 
 
 if __name__ == '__main__':
