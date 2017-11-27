@@ -24,7 +24,7 @@ This is the third project of the [Udacity Full Stack Nanodegree Program](https:/
 ## Views
 
 ### View 1
-```
+```sql
 create view status_success as
 	select date(time), status, count(date(time)) as num
 	from log
@@ -34,7 +34,7 @@ create view status_success as
 ```
 
 ### View 2
-```
+```sql
 create view status_error as
 	select date(time), status, count(date(time)) as num
 	from log
@@ -44,7 +44,7 @@ create view status_error as
 ```
 
 ### View 3
-```
+```sql
 create view error_rate as
 	select status_success.date, round((status_error.num::numeric / status_success.num::numeric) * 100, 2) as errors
 	from status_success, status_error
