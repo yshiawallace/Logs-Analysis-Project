@@ -22,7 +22,8 @@ find_top_authors = """SELECT name, count(*) AS views
         DESC;"""
 
 # Return the day(s) and error rate if error requests are greater than 1%
-find_high_error_rate = """SELECT to_char(error_rate.date, 'fmMonth DD, YYYY'), error_rate.errors
+find_high_error_rate = """SELECT to_char(error_rate.date, 'fmMonth DD, YYYY')
+        AS date, error_rate.errors
         FROM error_rate
         WHERE error_rate.errors > 1
         ORDER BY error_rate.errors DESC;"""
@@ -66,11 +67,11 @@ if __name__ == '__main__':
 
     # Print and format the results of the 3 database querys
     print("\nThe most popular 3 articles of all time:")
-    for article in articles:
-        print('"' + article[0] + '"', "– " + str(article[1]) + " views")
+    for title, views in articles:
+        print('"{}" - {} views'.format(title, views))
     print("\nThe most popular authors of all time:")
-    for author in authors:
-        print(author[0], "– " + str(author[1]) + " views")
+    for name, views in authors:
+        print('{} - {} views'.format(name, views))
     print("\nThe days on which more than 1% of requests led to errors:")
-    for error in errors:
-            print(error[0], "– " + str(error[1]) + "% errors")
+    for date, error in errors:
+            print('{} - {} errors'.format(date, error))
