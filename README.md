@@ -45,8 +45,8 @@ create view status_error as
 ### View 3
 ```sql
 create view error_rate as
-	select status_success.date, round((status_error.num::numeric / status_success.num::numeric) * 100, 2) as errors
-	from status_success, status_error
-	where status_success.date = status_error.date
+	select total_views.date, round((status_error.num::numeric / total_views.views::numeric) * 100, 2) as errors
+	from total_views, status_error
+	where total_views.date = status_error.date
 	order by errors desc;	
 ```
