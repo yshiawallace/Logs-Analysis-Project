@@ -5,18 +5,18 @@ import psycopg2
 DBNAME = "news"
 
 # Return the 3 most popular articles in the database, by number of views
-find_top_articles = """SELECT title, count(*) AS views
-        FROM articles,log
-        WHERE log.path LIKE concat('%',articles.slug)
-        GROUP BY title
-        ORDER BY views
-        DESC LIMIT 3;"""
+find_top_articles = """SELECT title, count(*) AS num
+    FROM articles, log
+    WHERE log.path = '/article/' || articles.slug
+    GROUP BY title
+    ORDER BY num DESC
+    LIMIT 3;"""
 
 # Return the names of the authors ordered by populariy based on views
 find_top_authors = """SELECT name, count(*) AS views
         FROM authors, articles, log
         WHERE authors.id = articles.author
-        AND log.path LIKE concat('%',articles.slug)
+        AND log.path = '/article/' || articles.slug
         GROUP BY name
         ORDER BY views
         DESC;"""
