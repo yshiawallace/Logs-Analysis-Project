@@ -46,7 +46,10 @@ def get_db_data(query):
                 [('DonnyM',32145), ('Sarah',65723), ('Terry',00934)]
 
     """
-    conn = psycopg2.connect(database=DBNAME)
+    try:
+        conn = psycopg2.connect(database=DBNAME)
+    except:
+        print('Cannot connect to the database.')
     cur = conn.cursor()
     cur.execute(query)
     return cur.fetchall()
