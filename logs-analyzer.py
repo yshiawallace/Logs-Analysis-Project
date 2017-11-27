@@ -44,7 +44,7 @@ def get_db_data(query):
             A list of tuples. For example:
 
                 [('DonnyM',32145), ('Sarah',65723), ('Terry',00934)]
-                    
+
     """
     conn = psycopg2.connect(database=DBNAME)
     cur = conn.cursor()
