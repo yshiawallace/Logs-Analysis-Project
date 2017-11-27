@@ -25,11 +25,10 @@ This is the third project of the [Udacity Full Stack Nanodegree Program](https:/
 
 ### View 1
 ```sql
-create view status_success as
-	select date(time), status, count(date(time)) as num
+create view total_views as
+	select date(time), count(date(time)) as views
 	from log
-	where status like '2%'
-	group by date(time), status
+	group by date(time)
 	order by date(time);
 ```
 
